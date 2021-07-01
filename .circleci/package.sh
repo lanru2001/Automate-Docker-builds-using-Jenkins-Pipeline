@@ -3,7 +3,7 @@
 #!/usr/bin/env sh
 set -e
 
-REGION="YOU_AWS_REGION"
+REGION="us-east-2"
 ECR_URL="YOUR_ECR_URL"
 BUILD_NUMBER="${BUILD_NUMBER:-$(date +%s)}"
 JAR_PATH="PATH_TO_YOUR_JAR"
