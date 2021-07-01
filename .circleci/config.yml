@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: openjdk:8
+    steps:
+      - checkout
+      - run: ./gradlew clean test --stacktrace --info
+  deploy:
+    docker:
+      - image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add py-pip
+            pip install awscli
+      - run: 
+          name: Build image and push
+          command: ./package.sh
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
