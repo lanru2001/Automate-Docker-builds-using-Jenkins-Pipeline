@@ -6,6 +6,14 @@ jobs:
     steps:
       - checkout
       - run: ./gradlew clean test --stacktrace --info
+    
+    environment:
+       AWS_ACCESS_KEY_ID     =
+       AWS_SECRET_ACCESS_KEY =
+       AWS_DEFAULT_REGION    = us-east-2
+       AWS_ACCOUNT_ID        = 
+       AWS_ECR_ACCOUNT_URL   =
+       
   deploy:
     docker:
       - image: docker:18.06.1-ce-git
